@@ -1,0 +1,14 @@
+# Core dependencies
+openai==2.14.0
+httpx==0.28.1
+PyYAML==6.0.3
+pandas==2.3.3
+tqdm==4.67.1
+tiktoken==0.12.0
+
+# Optional (used in trace summaries; guarded by try/except)
+# numpy==2.3.5
+# scipy==1.16.3
+# torch==2.10.0
+# tensorflow==2.20.0
+

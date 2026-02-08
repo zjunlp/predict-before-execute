@@ -1,194 +1,166 @@
-# MLE-bench
+<div align="center">
+<h2 align="center">Can We Predict Before Executing Machine Learning Agents?</p>
 
-Code for the paper ["MLE-Bench: Evaluating Machine Learning Agents on Machine Learning Engineering"](https://arxiv.org/abs/2410.07095). We have released the code used to construct the dataset, the evaluation logic, as well as the agents we evaluated for this benchmark.
+<h4 align="center">
+  <a href="https://arxiv.org/abs/2601.05930" target="_blank">📄Paper</a> •
+  <a href="https://huggingface.co/papers/2601.05930" target="_blank">🤗HFPaper</a> •
+  <a href="https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing" target="_blank">📦Data & Runtime</a> •
+  <a href="https://x.com/zxlzr/status/2010603724931285141" target="_blank">𝕏Blog</a> •
+  <a href="http://xhslink.com/o/8Ac0jDoHeyw" target="_blank">📕小红书</a>
+</h4>
 
-## Benchmarking
+![](https://img.shields.io/badge/python-3.10+-blue.svg)
+![](https://img.shields.io/badge/version-v1.0.0-green)
+![](https://img.shields.io/badge/last_commit-Feb-orange) 
+![](https://img.shields.io/badge/PRs-Welcome-red)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This section describes a canonical setup for comparing scores on MLE-bench. We recommend the following:
-- Repeat each evaluation with at least 3 seeds and report the Any Medal (%) score as the mean ± one standard error of the mean. The evaluation (task and grading) itself is deterministic, but agents/LLMs can be quite high-variance!
-- Agent resources - not a strict requirement of the benchmark but please report if you stray from these defaults!
-  - Runtime: 24 hours
-  - Compute: 36 vCPUs with 440GB RAM and one 24GB A10 GPU
-- Include a breakdown of your scores across Low, Medium, High, and All complexity [splits](experiments/splits) (see *Lite evaluation* below for why this is useful).
+---
 
-We demonstrate how this looks in practice by reporting the main results from [our paper (Table 2)](https://arxiv.org/abs/2410.07095) in the table below:
-
-| Agent | Low == Lite (%) | Medium (%) | High (%) | All (%) |
-|---------|--------|-----------|---------|----------|
-| AIDE o1-preview | 34.3 ± 2.4 | 8.8 ± 1.1 | 10.0 ± 1.9 | 16.9 ± 1.1 |
-| AIDE gpt-4o-2024-08-06 | 19.0 ± 1.3 | 3.2 ± 0.5 | 5.6 ± 1.0 | 8.6 ± 0.5 |
-| AIDE claude-3-5-sonnet-20240620 | 19.4 ± 4.9 | 2.6 ± 1.5 | 2.3 ± 2.3 | 7.5 ± 1.8 |
-| OpenHands gpt-4o-2024-08-06 | 11.5 ± 3.4 | 2.2 ± 1.3 | 1.9 ± 1.9 | 5.1 ± 1.3 |
-| AIDE llama-3.1-405b-instruct | 8.3 ± 2.6 | 1.2 ± 0.8 | 0.0 ± 0.0 | 3.1 ± 0.9 |
-| MLAB gpt-4o-2024-08-06 | 4.2 ± 1.5 | 0.0 ± 0.0 | 0.0 ± 0.0 | 1.3 ± 0.5 |
-
-### Lite Evaluation
-
-Evaluating agents with the above settings on the full 75 competitions of MLE-bench can be expensive. For users preferring a "lite" version of the benchmark, we recommend using the [Low complexity split](https://github.com/openai/mle-bench/blob/main/experiments/splits/low.txt) of our dataset, which consists of only 22 competitions. This reduces the number of runs substantially, while still allowing fair comparison along one column of the table above.
-
-Furthermore, the Low complexity competitions tend to be significantly more lightweight (158GB total dataset size compared to 3.3TB for the full set), so users may additionally consider reducing the runtime or compute resources available to the agents for further cost reduction. However, note that doing so risks degrading the performance of your agent. For example, see [Section 3.3 and 3.4 of our paper](https://arxiv.org/abs/2410.07095) where we have experimented with varying resources on the full competition set.
-
-The Lite dataset contains the following competitions:
-
-| Competition ID                              | Category                   | Dataset Size (GB) |
-|---------------------------------------------|----------------------------|--------------------|
-| aerial-cactus-identification                | Image Classification       | 0.0254            |
-| aptos2019-blindness-detection               | Image Classification       | 10.22             |
-| denoising-dirty-documents                   | Image To Image             | 0.06              |
-| detecting-insults-in-social-commentary      | Text Classification        | 0.002             |
-| dog-breed-identification                    | Image Classification       | 0.75              |
-| dogs-vs-cats-redux-kernels-edition          | Image Classification       | 0.85              |
-| histopathologic-cancer-detection            | Image Regression           | 7.76              |
-| jigsaw-toxic-comment-classification-challenge | Text Classification        | 0.06              |
-| leaf-classification                         | Image Classification       | 0.036             |
-| mlsp-2013-birds                             | Audio Classification       | 0.5851            |
-| new-york-city-taxi-fare-prediction          | Tabular                   | 5.7               |
-| nomad2018-predict-transparent-conductors    | Tabular                   | 0.00624           |
-| plant-pathology-2020-fgvc7                  | Image Classification       | 0.8               |
-| random-acts-of-pizza                        | Text Classification        | 0.003             |
-| ranzcr-clip-catheter-line-classification    | Image Classification       | 13.13             |
-| siim-isic-melanoma-classification           | Image Classification       | 116.16            |
-| spooky-author-identification                | Text Classification        | 0.0019            |
-| tabular-playground-series-dec-2021          | Tabular                   | 0.7               |
-| tabular-playground-series-may-2022          | Tabular                   | 0.57              |
-| text-normalization-challenge-english-language | Seq->Seq                 | 0.01              |
-| text-normalization-challenge-russian-language | Seq->Seq                 | 0.01              |
-| the-icml-2013-whale-challenge-right-whale-redux | Audio Classification     | 0.29314           |
-
-## Setup
-
-Some MLE-bench competition data is stored using [Git-LFS](https://git-lfs.com/).
-Once you have downloaded and installed LFS, run:
-
-```console
-git lfs fetch --all
-git lfs pull
-```
-
-You can install `mlebench` with pip:
-
-```console
-pip install -e .
-```
-
-### Pre-Commit Hooks (Optional)
-
-If you're committing code, you can install the pre-commit hooks by running:
-
-```console
-pre-commit install
-```
-
-## Dataset
-
-The MLE-bench dataset is a collection of 75 Kaggle competitions which we use to evaluate the ML engineering capabilities of AI systems.
-
-Since Kaggle does not provide the held-out test set for each competition, we
-provide preparation scripts that split the publicly available training set into
-a new training and test set.
-
-For each competition, we also provide grading scripts that can be used to
-evaluate the score of a submission.
-
-We use the [Kaggle API](https://github.com/Kaggle/kaggle-api) to download the
-raw datasets. Ensure that you have downloaded your Kaggle credentials
-(`kaggle.json`) and placed it in the `~/.kaggle/` directory (this is the default
-location where the Kaggle API looks for your credentials). To download and prepare the MLE-bench dataset, run the following, which will download and prepare the dataset in your system's default cache directory. Note, we've found this to take two days when running from scratch:
-
-```console
-mlebench prepare --all
-```
-
-To prepare the lite dataset, run:
-
-```console
-mlebench prepare --lite
-```
-
-Alternatively, you can prepare the dataset for a specific competition by
-running:
-
-```console
-mlebench prepare -c <competition-id>
-```
-
-Run `mlebench prepare --help` to see the list of available competitions.
+</div>
 
 
+This repository contains the official implementation and data for the paper **"Can We Predict Before Executing Machine Learning Agents?"**.
 
-## Grading Submissions
+Traditional machine learning agents rely on an iterative "Generate-Execute-Feedback" loop, suffering from a severe **Execution Bottleneck**. Addressing this, we ask: *Can we compress hours of physical execution into seconds of logical inference?*
 
-Answers for competitions must be submitted in CSV format; the required format is described in each competition's description, or shown in a competition's sample submission file. You can grade multiple submissions by using the `mlebench grade` command. Given a JSONL file, where each line corresponds with a submission for one competition, `mlebench grade` will produce a grading report for each competition. The JSONL file must contain the following fields:
-- `competition_id`: the ID of the competition in our dataset.
-- `submission_path`: a `.csv` file with the predictions for the specified
-  competition.
+To answer this, we introduce **Data-centric Solution Preference**—predicting solution performance without physical execution by leveraging "Implicit Execution Priors". We operationalize this in **FOREAGENT**, an agent employing a **Predict-then-Verify** loop to decouple exploration from execution.
 
-See more information by running `mlebench grade --help`.
+Our work demonstrates that LLMs exhibit significant predictive capabilities. **FOREAGENT** achieves a **6× acceleration**, expands the search space by **3.2×**, and yields a **+6% performance gain** over baselines. We also release a foundational dataset of verified execution trajectories.
 
-You can also grade individual submissions using the `mlebench grade-sample` command. For example, to grade a submission for the Spaceship Titanic competition, you can run:
+## 📰 News
 
-```console
-mlebench grade-sample <PATH_TO_SUBMISSION> spaceship-titanic
-```
+- **[2026-02-08]** We have released all [code](.) and [data](https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing).
+- **[2026-01-09]** We release our paper [Can We Predict Before Executing Machine Learning Agents?](https://arxiv.org/abs/2601.05930).
 
-See more information by running `mlebench grade-sample --help`.
+## 📖 Contents
 
-## Environment
+- [🔍 Overview](#-overview)
+- [🚀 Results](#-results)
+- [📦 Data & Runtime](#-data--runtime)
+- [🛠️ Environment Setup](#-environment-setup)
+- [🙏 Acknowledgement](#-acknowledgement)
+- [👥 Contributors](#-contributors)
+- [📝 Citation](#-citation)
 
-We provide a base Docker image `mlebench-env` which is the base environment for our agents. This base image contains:
-- Conda environment used to execute our agents. We optionally (default true) install Python packages in this environment which are commonly used across our agents. If you don't want to install these packages, set the `INSTALL_HEAVY_DEPENDENCIES` environment variable to `false` when building the image, by adding `--build-arg INSTALL_HEAVY_DEPENDENCIES=false` to the `docker build` command below
-- Instructions for agents to follow when creating their submission
-- Grading server for agents to use when checking that the structure of their submission is correct
+## 🔍 Overview
 
-Build this image by running:
+To answer the titular question, we structured our research into three key phases, corresponding to the modules in this repository:
+
+1.  **Corpus Construction** (`prepare_bench_subset/`) 🏗️
+    *   We defined the **Data-centric Solution Preference** task and constructed a large-scale corpus of **18,438** pairwise comparisons derived from real-world execution trajectories (AIDE & AutoMind) on MLE-bench.
+    *   This module handles solution sampling, cleaning, execution, and ground-truth generation.
+    *   👉 [prepare_bench_subset/README.md](prepare_bench_subset/README.md)
+
+2.  **Predictive Evaluation** (`grade/`) 📊
+    *   We extensively evaluated LLMs (e.g., DeepSeek-V3.2, GPT-5.1) on this corpus to determine if they possess "Implicit Execution Priors".
+    *   We found that reasoning-optimized models significantly outperform random guessing and complexity heuristics.
+    *   👉 [grade/README.md](grade/README.md)
+
+3.  **FOREAGENT Application** (`mle-bench/`) 🤖
+    *   Leveraging these findings, we developed **FOREAGENT**, an autonomous agent that integrates the "Predict-then-Verify" loop.
+    *   By using the LLM as an implicit world model to prune the search space, it decouples exploration from expensive physical execution.
+    *   👉 [mle-bench/README.md](mle-bench/README.md)
+
+<div align="center">
+  <img src="assets/framework.png" width="85%">
+</div>
+
+## 🚀 Results
+
+### 1. Feasibility of Run-Free Preference
+Our experiments on the curated corpus demonstrate that LLMs exhibit significant predictive capabilities, transcending simple heuristics.
+
+<div align="center">
+
+| Model | Accuracy | vs. Random (50%) | vs. Heuristic (50.8%) |
+| :---: | :---: | :---: | :---: |
+| **DeepSeek-V3.2-Thinking** | **61.5%** | ✅ Significant | ✅ Significant |
+| GPT-5.1 | 58.8% | ✅ Significant | ✅ Significant |
+
+</div>
+
+Stratified pairwise accuracy results proving LLMs derive valid signals from static inputs through genuine reasoning.
+
+<div align="center">
+  <img src="assets/main_result.png" width="85%">
+</div>
+
+### 2. FOREAGENT Performance
+Integrating this predictive mechanism into the **FOREAGENT** application yields substantial efficiency and performance gains:
+
+- ⚡ **6× Speedup**: Converges to peak performance using only 1/6 of the execution time compared to baselines.
+- 🔍 **3.2× Broader Search**: Explores significantly more solution candidates within the same time budget.
+- 📈 **+6% Beat Ratio**: achieves a higher win rate against human leaderboard contestants across diverse AI4Science tasks (e.g., Biology, Physics, Geoscience).
+
+<div align="center">
+  <img src="assets/agent_result.png" width="85%">
+</div>
+
+## 📦 Data & Runtime
+
+We provide the curated solution corpora, analysis subsets, agent-run trajectories, and task resources used in our experiments.
+
+📥 **[Download Data (Google Drive)](https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing)**
+
+The data package includes (but is not limited to):
+- **`solutions_all/`**: The full unfiltered solution corpus.
+- **`solutions_subset_50/`**: The main experiment subset (capped at 50 solutions per task).
+- **`agent_runs/`**: Full trajectories and logs from AIDE and ForeAgent runs.
+- **`tasks/`**: Shared data hub containing competition data, descriptions, and analysis reports.
+
+For a comprehensive description, please refer to the `data/README.md` file included in the downloaded package.
+
+## 🛠️ Environment Setup
+
+### 1. Corpus Construction & Prediction Benchmark
+
+To build the corpus or run the prediction benchmark, please set up the environment as follows:
 
 ```bash
-docker build --platform=linux/amd64 -t mlebench-env -f environment/Dockerfile .
+conda create -n pbe python=3.10
+conda activate pbe
+pip install -r requirement.txt
+
+# Set environment variables
+export OPENAI_API_KEY="<your_openai_api_key>"
+export OPENAI_BASE_URL="<your_openai_base_url>"
+export OPENAI_MODEL="DeepSeek-V3.2"
 ```
 
-## Agents
+- **Corpus Construction**: Navigate to [`prepare_bench_subset`](prepare_bench_subset/README.md).
+- **Prediction Benchmark**: Navigate to [`grade`](grade/README.md).
 
-We purposefully designed our benchmark to not make any assumptions about the agent that produces submissions, so agents can more easily be evaluated on this benchmark. We evaluated three open-source agents; we discuss this procedure in [agents/README.md](agents/README.md).
+### 2. ForeAgent (Agent Execution)
 
-## Extras
+Our agent implementation is based on MLE-bench. Please refer to [`mle-bench/README.md`](mle-bench/README.md) for detailed installation and execution instructions.
 
-We include additional features in the MLE-bench repository that may be useful
-for MLE-bench evaluation. These include a rule violation detector and
-a plagiarism detector. We refer readers to
-[extras/README.md](extras/README.md) for more information.
+## 🙏 Acknowledgement
 
-## Examples
+This project builds upon and expresses gratitude to the following open-source projects:
+- [AutoMind: Adaptive Knowledgeable Agent for Automated Data Science](https://github.com/zjunlp/AutoMind)
+- [AIDE: AI-Driven Exploration in the Space of Code](https://github.com/WecoAI/aideml)
+- [MLE-Bench: Evaluating Machine Learning Agents on Machine Learning Engineering](https://github.com/openai/mle-bench)
 
-We collect example usage of this library in the `examples/` directory, see [examples/README.md](examples/README.md) for more information.
+## 👥 Contributors
 
-## Experiments
+<a href="https://github.com/zjunlp/predict-before-execute/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zjunlp/predict-before-execute" /></a>
 
-We place the code specific to the experiments from our publication of the
-benchmark in the `experiments/` directory:
-- For instance, our competition splits are available in `experiments/splits/`.
-- For a completed set of runs from a given agent, you can use the provided
-`experiments/make_submission.py` script to compile its submission for grading.
-- We release our methodology for the "familiarity" experiments in `experiments/familiarity/`, see [experiments/familiarity/README.md](experiments/familiarity/README.md) for more information.
+We will offer long-term maintenance to fix bugs for the project. Issues and PRs are welcome!
 
-## Dev
+## 📝 Citation
 
-Note, when running `pytest` locally, be sure to accept the competition rules otherwise the tests will fail.
+If you find this work useful in your research, please cite our paper:
 
-## Authors
-
-Chan Jun Shern, Neil Chowdhury, Oliver Jaffe, James Aung, Dane Sherburn, Evan Mays, Giulio Starace, Kevin Liu, Leon Maksin, Tejal Patwardhan, Lilian Weng, Aleksander Mądry
-
-## Citation
-
-Please cite using the following BibTeX entry:
-```
-@article{chan2024mle-bench,
-  title={MLE-bench: Evaluating Machine Learning Agents on Machine Learning Engineering},
-  author={Jun Shern Chan and Neil Chowdhury and Oliver Jaffe and James Aung and Dane Sherburn and Evan Mays and Giulio Starace and Kevin Liu and Leon Maksin and Tejal Patwardhan and Lilian Weng and Aleksander Mądry},
-  year={2024},
-  eprint={2410.07095},
-  archivePrefix={arXiv},
-  primaryClass={cs.CL},
-  url={https://arxiv.org/abs/2410.07095}
+```bibtex
+@misc{zheng2026predictexecutingmachinelearning,
+      title={Can We Predict Before Executing Machine Learning Agents?}, 
+      author={Jingsheng Zheng and Jintian Zhang and Yujie Luo and Yuren Mao and Yunjun Gao and Lun Du and Huajun Chen and Ningyu Zhang},
+      year={2026},
+      eprint={2601.05930},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2601.05930}, 
 }
 ```

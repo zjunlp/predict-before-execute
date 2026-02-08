@@ -1,0 +1,306 @@
+{
+    "aptos2019-blindness-detection": { // 60
+        "DeiT": 3,
+        "Swin Transformer": 10,
+        "ConvNeXt": 10,
+        "Vision Transformer": 8,
+        "CNN-LSTM": 1,
+        "EfficientNet": 14,
+        "ResNet": {
+            "ResNet50": 7,
+            "ResNet18": 7
+        }
+    },
+    "denoising-dirty-documents": { // 45
+        "Restormer": 8,
+        "Residual CNN": {
+            "Simple CNN": 1,
+            "Hybrid CNN-Transformer": 6,
+            "Residual Dense Network (RDN)": 10
+        },
+        "U-Net": 10,
+        "Convolutional Autoencoder": 10
+    },
+    "detecting-insults-in-social-commentary": { // 27
+        "DistilBERT": 3,
+        "Logistic Regression": 2,
+        "DeBERTa": 2,
+        "Multi-Task DeBERTa-V3": 6,
+        "RoBERTa Sequence Classification": 4,
+        "BERT Sequence Classification": 3,
+        "DeBERTa-V3": 7
+    },
+    "dog-breed-identification": { // 3
+        "ConvNeXt-Large": 2,
+        "ResNet18": 1
+    },
+    "google-quest-challenge": { // 100
+        "Student Model": 1,
+        "Data Processing Pipeline": 2,
+        "Graph Attention Network": 3,
+        "Hierarchical Attention Model": 5,
+        "MLP": 3,
+        "Cross-Attention Model": 5,
+        "Multi-Task Neural Network": 10,
+        "Longformer": 1,
+        "Sentence Transformer": 5,
+        "MultiModal Transformer": {
+            "MultiModal Model": {
+                "Longformer-base Embeddings": 1
+            },
+            "other": 9
+        },
+        "ELECTRA": 2,
+        "DeBERTa": 10,
+        "RoBERTa": 10,
+        "LSTM": 1,
+        "Random Forest": 2,
+        "BERT": 10,
+        "XGBoost": 5,
+        "Ridge Regression": 5,
+        "LightGBM": 10
+    },
+    "jigsaw-toxic-comment-classification-challenge": { // 5
+        "RoBERTa": 3,
+        "DistilBERT": 1,
+        "DeBERTa": 1
+    },
+    "leaf-classification": { // 17
+        "LightGBM": 13,
+        "Feedforward Neural Network": 2,
+        "HybridLeafClassifier (ResNet18 + Attention)": 1,
+        "XGBoost": 1
+    },
+    "learning-agency-lab-automated-essay-scoring-2": { // 20
+        "Hybrid Neural Network": 4,
+        "HybridEssayScorer": 3,
+        "Neural Network Ensemble": 2,
+        "Stacking Ensemble": 3,
+        "MetaModel Neural Network": 5,
+        "LightGBM": 3
+    },
+    "lmsys-chatbot-arena": { // 60
+        "DeBERTa-v3-base Sequence Classification": 4,
+        "Dual Encoder Neural Network": 4,
+        "RoBERTa Sequence Classification": 6,
+        "RoBERTa-based Preference Model": 5,
+        "MLP Classifier": 9,
+        "XGBoost": 11,
+        "Logistic Regression": 11,
+        "LightGBM": 10
+    },
+    "mlsp-2013-birds": { // 95
+        "Dual-Input Transformer + CNN": 3,
+        "Dual-Stream Model Architecture": 5,
+        "Feedforward Neural Network": 10,
+        "Multi-Modal Neural Network": 10,
+        "Transformer Encoder": 10,
+        "Random Forest": 9,
+        "Convolutional Neural Network": 10,
+        "XGBoost": 10,
+        "Ensemble (LR, XGBoost, MLP)": 6,
+        "Ensemble (LR + XGBoost)": 10,
+        "Ensemble Stacking": 1,
+        "LightGBM": 1,
+        "Logistic Regression": 10
+    },
+    "new-york-city-taxi-fare-prediction": { // 30
+        "CatBoost": 1,
+        "Dual-Branch Neural Network": 1,
+        "Residual Neural Network": 1,
+        "Feedforward Neural Network": 7,
+        "LightGBM": 10,
+        "XGBoost": 10
+    },
+    "nomad2018-predict-transparent-conductors": { // 3
+        "XGBoost": 2,
+        "Random Forest": 1
+    },
+    "petfinder-pawpularity-score": { // 30
+        "XGBoost": 1,
+        "Vision Transformer with Metadata Fusion": 2,
+        "LightGBM": 27
+    },
+    "plant-pathology-2020-fgvc7": { // 6
+        "EfficientNet": 2,
+        "Swin Transformer": 2,
+        "ResNet": 1,
+        "Vision Transformer": 1
+    },
+    "predict-volcanic-eruptions-ingv-oe": { // 60
+        "TabTransformer": 2,
+        "TCN Model": 1,
+        "Model Ensemble Selection": 2,
+        "MultiBranchVolcanoModel": 1,
+        "VolcanoTransformer": 1,
+        "Transformer Regressor": 2,
+        "Laplace MLP": 2,
+        "Multi-Task Neural Network": 3,
+        "Ensemble MLP": 1,
+        "CNN-Transformer Hybrid": 1,
+        "Multihead MLP": 2,
+        "MLP Regressor": 11,
+        "Hybrid CNN-MLP Model": 1,
+        "Fully Connected Neural Network": 1,
+        "Convolutional Neural Network": 4,
+        "Random Forest": 4,
+        "XGBoost": 10,
+        "LightGBM": 11
+    },
+    "random-acts-of-pizza": { // 110
+        "Jina-embeddings-v2-base-en": 2,
+        "BGE-base-en-v1.5 Embeddings": 1,
+        "SentenceTransformer MPNet": 5,
+        "MiniLM Text Embeddings": 1,
+        "LoRA Fine-tuning": 1,
+        "RoBERTa-base": 10,
+        "Knowledge Distillation": 10,
+        "Neural Network": 10,
+        "Multimodal Neural Network": 10,
+        "BERT-based Model": 10,
+        "DistilBERT Sequence Classification": 10,
+        "Random Forest": 10,
+        "XGBoost": 10,
+        "Logistic Regression": 10,
+        "LightGBM Classifier": 10
+    },
+    "spooky-author-identification": { // 82
+        "Hierarchical Transformer": 1,
+        "Transformer": 2,
+        "MLP": 2,
+        "Knowledge Distillation": 5,
+        "DeBERTa": 10,
+        "ELECTRA": 5,
+        "BERT": 10,
+        "LSTM": 4,
+        "XGBoost": 4,
+        "Random Forest": 3,
+        "Ensemble": 10,
+        "LightGBM": 3,
+        "Naive Bayes": 3,
+        "Support Vector Machine": 10,
+        "Logistic Regression": 10
+    },
+    "stanford-covid-vaccine": { // 157
+        "Bayesian Optimization": 1,
+        "Hybrid CNN-GNN": 7,
+        "Hybrid Graph-Transformer Model": 3,
+        "Transformer-Graph Hybrid": 7,
+        "Model Ensemble (ModelA + ModelB)": 10,
+        "FusionEnsemble Model": 10,
+        "Graph Neural Network": 10,
+        "Transformer": 10,
+        "Transformer-CNN Hybrid": 10,
+        "RNAModel": 10,
+        "PerBaseRegressionModel": 10,
+        "Transformer-GRU Hybrid Model": 10,
+        "XGBoost": 10,
+        "LSTM": 8,
+        "Hybrid CNN-BiLSTM": 3,
+        "RandomForestRegressor": 3,
+        "Weighted Structure Baseline": 2,
+        "Structure-Nucleotide Ensemble": 3,
+        "LightGBM": 10,
+        "Mean Baseline": 7,
+        "Median Baseline": 10
+    },
+    "statoil-iceberg-classifier-challenge": { // 87
+        "EfficientNet": 1,
+        "Inverted Bottleneck Network": 10,
+        "Hybrid CNN-Vision Transformer": 5,
+        "Swin Transformer": 4,
+        "ConvNeXt": 10,
+        "Vision Transformer": 10,
+        "ResNet": 10,
+        "SVM": 1,
+        "Random Forest Classifier": 3,
+        "Feedforward Neural Network": 10,
+        "XGBoost": 10,
+        "LightGBM": 3,
+        "CNN": 10
+    },
+    "tabular-playground-series-dec-2021": { // 24
+        "Feedforward Neural Network": 1,
+        "Multi-Branch Neural Network": 2,
+        "LightGBM": 7,
+        "Two-Branch Neural Network": 9,
+        "Custom Neural Network": 3,
+        "TabTransformer": 2
+    },
+    "tensorflow-speech-recognition-challenge": { // 46
+        "Knowledge Distillation with Teacher Ensemble": 1,
+        "Wav2Vec2 and CNN Ensemble": 1,
+        "WavLM Classifier": 2,
+        "WavLM and CNNTransformer Ensemble": 2,
+        "Wav2Vec2 Classifier": 3,
+        "Transformer Classifier": 2,
+        "MLP Classifier": 1,
+        "CNN": 10,
+        "Random Forest Classifier": 10,
+        "Logistic Regression": 2,
+        "SVM": 9,
+        "MobileNetV3Small": 1,
+        "ResNet-style CNN": 2
+    },
+    "tgs-salt-identification-challenge": { // 44
+        "DeepLabV3Plus": 4,
+        "EfficientNet": 10,
+        "Single Segmentation Model": 2,
+        "Two-Stage Pipeline": 2,
+        "Vision Transformer": 4,
+        "Ensemble Segmentation": 10,
+        "Swin Transformer": 1,
+        "ConvNeXt": 1,
+        "U-Net": 10
+    },
+    "the-icml-2013-whale-challenge-right-whale-redux": { // 24
+        "Gradient Boosting Classifier": 2,
+        "CNN (WhaleNet)": 6,
+        "LightGBM": 1,
+        "XGBoost": 4,
+        "Mel Spectrogram Features": 1,
+        "Wav2Vec2 Feature Extractor": 10
+    },
+    "tweet-sentiment-extraction": { // 21
+        "Model Ensemble": 1,
+        "RoBERTa-BiLSTM": 3,
+        "RoBERTa": 10,
+        "RoBERTa-BiLSTM Hybrid": 7
+    },
+    "us-patent-phrase-to-phrase-matching": { // 94
+        "Cross-Attention Hybrid Network": 1,
+        "RandomForestRegressor": 2,
+        "Custom Neural Network": 10,
+        "Stacking Ensemble": 2,
+        "RoBERTa": 10,
+        "DeBERTa": 10,
+        "XGBoost": 10,
+        "BERT": 10,
+        "Sentence Transformer": 10,
+        "Similarity Model": 9,
+        "Linear Regression": 10,
+        "LightGBM": 10
+    },
+    "ventilator-pressure-prediction": { // 82
+        "Gated Residual Network": 1,
+        "GRU with Multihead Attention": 2,
+        "GRU Network": 4,
+        "LSTM with Multiplicative Branch": 2,
+        "Residual Convolutional Network": 1,
+        "Temporal Fusion Transformer": 2,
+        "Temporal Fusion Network": 1,
+        "FNet Model": 2,
+        "Baseline Group Means": 1,
+        "Factorized Multi-Branch Network": 1,
+        "CNN with Transformer Encoder": 10,
+        "HistGradientBoostingRegressor": 1,
+        "LightGBM Ensemble": 1,
+        "XGBoost": 5,
+        "LSTM": 9,
+        "TCN-BiLSTM Hybrid": 4,
+        "LSTM with Multihead Attention": 5,
+        "LightGBM": 10,
+        "TCN with Multihead Attention": 10,
+        "Transformer": 10
+    }
+}

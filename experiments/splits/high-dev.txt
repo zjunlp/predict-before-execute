@@ -1,3 +1,0 @@
-bms-molecular-translation
-nfl-player-contact-detection
-predict-volcanic-eruptions-ingv-oe
