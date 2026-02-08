@@ -1,0 +1,7 @@
+aerial-cactus-identification
+denoising-dirty-documents
+histopathologic-cancer-detection
+jigsaw-toxic-comment-classification-challenge
+mlsp-2013-birds
+nomad2018-predict-transparent-conductors
+text-normalization-challenge-english-language

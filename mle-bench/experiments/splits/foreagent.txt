@@ -1,0 +1,5 @@
+stanford-covid-vaccine
+ventilator-pressure-prediction
+statoil-iceberg-classifier-challenge
+aerial-cactus-identification
+histopathologic-cancer-detection

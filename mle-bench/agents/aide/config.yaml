@@ -1,0 +1,53 @@
+vars:
+  step_count: &step_count 5000
+  time_limit: &time_limit 43200 # 12 hrs
+
+defaults: &defaults
+  start: aide/start.sh
+  dockerfile: aide/Dockerfile
+  kwargs_type: omegaconf
+  env_vars: &env_vars
+    TIME_LIMIT_SECS: *time_limit
+    STEP_LIMIT: *step_count
+    OPENAI_API_KEY: ${OPENAI_API_KEY}
+    OPENAI_BASE_URL: ${OPENAI_BASE_URL}
+    HF_ENDPOINT: https://hf-mirror.com/ # Optional: use HF mirror for faster model access
+
+kwargs_common: &kwargs_common
+  agent.search.max_debug_depth: 20 # debug down a branch for up to 20 steps
+  agent.search.debug_prob: 1 # always debug when there's something to debug
+  agent.time_limit: *time_limit
+  exec.timeout: 32400 # 9 hours limit _per step_, to match max of kaggle.com
+  copy_data: False # use symbolic links
+  agent.search.num_drafts: 3 # generate 3 drafts per step to choose from
+
+
+aide/DeepSeek-V3.2:
+  <<: *defaults
+  kwargs:
+    <<: *kwargs_common
+    agent.code.model: DeepSeek-V3.2
+    agent.feedback.model: gpt-4o-mini-2024-07-18
+    agent.search.num_drafts: 3
+    agent.steps: *step_count
+  env_vars:
+    <<: *env_vars
+
+ForeAgent/DeepSeek-V3.2:
+  <<: *defaults
+  kwargs:
+    <<: *kwargs_common
+    agent.code.model: DeepSeek-V3.2
+    agent.feedback.model: gpt-4o-mini-2024-07-18  # Changed: use a model that supports function calling
+    agent.steps: *step_count
+    # World Model configuration
+    agent.use_world_model: True
+    agent.world_model_model: DeepSeek-V3.2-Thinking
+    agent.world_model_temp: 1.0
+    agent.world_model_confidence_threshold: 0.7
+    agent.world_model_exec_probability: 0.2
+    agent.improve_num_candidates: 10
+    agent.improve_top_k: 1
+    agent.search.num_drafts: 3 # generate 3 drafts per step to choose from
+  env_vars:
+    <<: *env_vars
