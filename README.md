@@ -1,19 +1,24 @@
 <div align="center">
-<h2 align="center">Can We Predict Before Executing Machine Learning Agents?</p>
+<h2 align="center">Can We Predict Before Executing Machine Learning Agents?</h2>
 
 <h4 align="center">
   <a href="https://arxiv.org/abs/2601.05930" target="_blank">📄Paper</a> •
   <a href="https://huggingface.co/papers/2601.05930" target="_blank">🤗HFPaper</a> •
+  <a href="https://huggingface.co/datasets/zjunlp/PredictBeforeExecute" target="_blank">🤗Dataset</a> •
   <a href="https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing" target="_blank">📦Data & Runtime</a> •
   <a href="https://x.com/zxlzr/status/2010603724931285141" target="_blank">𝕏Blog</a> •
   <a href="http://xhslink.com/o/8Ac0jDoHeyw" target="_blank">📕小红书</a>
 </h4>
 
-![](https://img.shields.io/badge/python-3.10+-blue.svg)
-![](https://img.shields.io/badge/version-v1.0.0-green)
-![](https://img.shields.io/badge/last_commit-Feb-orange) 
-![](https://img.shields.io/badge/PRs-Welcome-red)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python">
+  <img src="https://img.shields.io/badge/version-v1.0.0-green" alt="Version">
+  <img src="https://img.shields.io/badge/last_commit-Feb-orange" alt="Last Commit">
+  <img src="https://img.shields.io/badge/PRs-Welcome-red" alt="PRs Welcome">
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+  </a>
+</p>
 
 ---
 
@@ -30,8 +35,9 @@ Our work demonstrates that LLMs exhibit significant predictive capabilities. **F
 
 ## 📰 News
 
-- **[2026-02-08]** We have released all [code](.) and [data](https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing).
-- **[2026-01-09]** We release our paper [Can We Predict Before Executing Machine Learning Agents?](https://arxiv.org/abs/2601.05930).
+- **[2026-03-10]** We have released the Preference Corpus on [Hugging Face](https://huggingface.co/datasets/zjunlp/PredictBeforeExecute)! 🤗
+- **[2026-02-08]** We have released all [code](.) and [runtime data](https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing).
+- **[2026-01-09]** We release our paper[Can We Predict Before Executing Machine Learning Agents?](https://arxiv.org/abs/2601.05930).
 
 ## 📖 Contents
 
@@ -100,6 +106,14 @@ Integrating this predictive mechanism into the **FOREAGENT** application yields 
 ## 📦 Data & Runtime
 
 We provide the curated solution corpora, analysis subsets, agent-run trajectories, and task resources used in our experiments.
+
+🤗 **[Download Preference Corpus (Hugging Face)](https://huggingface.co/datasets/zjunlp/PredictBeforeExecute)**
+
+You can easily load the preference data with a single line of code:
+```python
+from datasets import load_dataset
+dataset = load_dataset("zjunlp/PredictBeforeExecute")
+```
 
 📥 **[Download Data (Google Drive)](https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing)**
 
