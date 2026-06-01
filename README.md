@@ -6,7 +6,7 @@
   <a href="https://huggingface.co/papers/2601.05930" target="_blank">🤗HFPaper</a> •
   <a href="https://huggingface.co/datasets/zjunlp/PredictBeforeExecute" target="_blank">🤗Dataset</a> •
   <a href="https://drive.google.com/drive/folders/1rn3GuRcl-BrnPG2xUJYCOJB-BwGp7bp0?usp=sharing" target="_blank">📦Data & Runtime</a> •
-  <a href="https://x.com/zxlzr/status/2010603724931285141" target="_blank">𝕏Blog</a> •
+  <a href="https://x.com/zxlzr/status/2010611145812709830" target="_blank">𝕏Blog</a> •
   <a href="http://xhslink.com/o/8Ac0jDoHeyw" target="_blank">📕小红书</a>
 </h4>
 
